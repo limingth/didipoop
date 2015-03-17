@@ -1,0 +1,29 @@
+<head>
+  <title>didipoop</title>
+</head>
+
+<body>
+  <div class="page-header">
+    <h1>滴滴拉屎Meteor 0.1版!（<a href="http://maodou.io">毛豆网</a>出品）</h1>
+  </div>
+
+  {{> hello}}
+</body>
+
+<template name="hello">
+  <button type="button" class="btn btn-lg btn-warning">我要拉屎</button>
+  <br>
+  <br>
+    <p>
+    {{#if toomanypoop}}
+      <div class="alert alert-danger" role="alert">
+          <strong>今天拉得次数太多了，快躺下休息一会吧.</strong> 
+      </div>    
+    {{else}}
+      <div class="alert alert-warning" role="alert">
+        <strong>你已经拉了 {{counter}} 次屎.</strong>
+      </div>
+    {{/if}}
+    </p>
+
+</template>
