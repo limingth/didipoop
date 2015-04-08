@@ -10,7 +10,7 @@ body{
   top:60px;
   left: 0;
   right:0;
-  bottom:60px;
+  bottom:0;
 }
 #tip{
   min-height:65px;
