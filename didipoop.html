@@ -13,31 +13,6 @@
   {{> cluster}}
 </body>
 
-<template name="hello">
-  <img src="/didi-fake.png" />
-  <br>
-  <br>
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="btn btn-lg btn-warning">我要拉屎</button>
-      </div>
-  </div>
-  <br>
-  <br>
-    <p>
-    {{#if toomanypoop}}
-      <div class="alert alert-danger" role="alert">
-        <strong>今天拉得次数太多了，快躺下休息一会吧.</strong>
-      </div>
-    {{else}}
-      <div class="alert alert-warning" role="alert">
-        <strong>你已经拉了 {{counter}} 次屎.</strong>
-      </div>
-    {{/if}}
-    </p>
-
-</template>
-
 <template name="map">
   <div id='mapContainer'></div>
   <div class="tip">
