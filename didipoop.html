@@ -39,7 +39,7 @@
 
 <template name="map">
   <div id='mapContainer'></div>
-  <div id="tip">
+  <div class="tip">
     <div>
       <input type="button" value="持续监控位置" onclick="watchPosition()"/>
       <input type="button" value="获得当前位置" onclick="getCurrentPosition()"/>
@@ -49,12 +49,25 @@
     <div id="result"></div>
   </div>
 
+  <div class="tip">
+    <input type="button" value="自定义样式点聚合" onClick="javascript:addCluster(1)"/>
+    <input type="button" value="默认样式点聚合" onClick="javascript:addCluster(0)"/>
+  </div>
+
+
   <script type="text/javascript">
     var map, geolocation;
     //加载地图，调用浏览器定位服务
-    map = new AMap.Map('mapContainer', {
-      resizeEnable: true
+    map = new AMap.Map("mapContainer",{
+      resizeEnable: true,
+      //二维地图显示视口
+      view: new AMap.View2D({
+        center:new AMap.LngLat(116.397428, 39.90923),
+        zoom:13
+      })
+
     });
+
     map.plugin('AMap.Geolocation', function () {
       geolocation = new AMap.Geolocation({
         enableHighAccuracy: true,//是否使用高精度定位，默认:true
@@ -111,5 +124,50 @@
       str += '</p>';
       result.innerHTML = str;
     };
+
+    var cluster;
+    var markers= [];
+
+    // 随机向地图添加500个标注点
+    var mapBounds = map.getBounds();
+    var sw = mapBounds.getSouthWest();
+    var ne = mapBounds.getNorthEast();
+    var lngSpan = Math.abs(sw.lng - ne.lng);
+    var latSpan = Math.abs(ne.lat - sw.lat);
+
+    for (var i = 0; i < 500; i ++) {
+      var markerPosition = new AMap.LngLat(sw.lng + lngSpan * (Math.random() * 1),ne.lat - latSpan * (Math.random() * 1));
+      var marker = new AMap.Marker({
+        //基点位置
+        position:markerPosition,
+        //marker图标，直接传递地址url
+        icon:"http://developer.amap.com/wp-content/uploads/2014/06/marker.png",
+        //相对于基点的位置
+        offset:{x:-8, y:-34}
+      });
+      markers.push(marker);
+    }
+    addCluster(0);
+
+    //添加点聚合
+    function addCluster(tag) {
+      if(cluster) {
+        cluster.setMap(null);
+      }
+      if(tag==1) {
+        var sts=[{url:"http://developer.amap.com/wp-content/uploads/2014/06/1.png", size:new AMap.Size(32,32),offset:new AMap.Pixel(-16,-30)},
+        {url:"http://developer.amap.com/wp-content/uploads/2014/06/2.png", size:new AMap.Size(32,32),offset:new AMap.Pixel(-16,-30)},
+        {url:"http://developer.amap.com/wp-content/uploads/2014/06/3.png", size:new AMap.Size(48,48),offset:new AMap.Pixel(-24,-45),textColor:'#CC0066'}];
+        map.plugin(["AMap.MarkerClusterer"],function(){
+          cluster = new AMap.MarkerClusterer(map,markers,{styles:sts});
+        });
+      }
+      else {
+        map.plugin(["AMap.MarkerClusterer"],function(){
+          cluster = new AMap.MarkerClusterer(map,markers);
+        });
+      }
+    }
+
   </script>
 </template>
