@@ -1,3 +1,4 @@
+Template.cluster.rendered = function() {
   var cluster;
   var markers= [];
   //地图初始化&向地图随机加点
@@ -30,8 +31,9 @@
     });
     markers.push(marker);
   }
-Template.cluster.helpers({
-  addCluster: function(tag) {
+  addCluster(0);
+
+  function addCluster(tag) {
     //添加点聚合
     if(cluster) {
       cluster.setMap(null);
@@ -50,5 +52,4 @@ Template.cluster.helpers({
       });
     }
   }
-
-});
+};
