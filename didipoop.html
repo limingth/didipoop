@@ -29,13 +29,13 @@
 <template name="cluster">
   <div id="mapContainer"></div>
   <div class="tip">
-    <input type="button" value="自定义样式点聚合" onClick="javascript:addCluster(1)"/>
-    <input type="button" value="默认样式点聚合" onClick="javascript:addCluster(0)"/>
+    <input type="button" value="自定义样式点聚合" onClick="javascript:addCluster(1)">
+    <input type="button" value="默认样式点聚合" onClick="javascript:addCluster(0)">
   </div>
   <div class="tip">
     <div>
-      <input type="button" value="持续监控位置" onclick="watchPosition()"/>
-      <input type="button" value="获得当前位置" onclick="getCurrentPosition()"/>
+      <input type="button" value="持续监控位置" id="watchPosition">
+      <input type="button" value="获得当前位置" id="getCurrentPosition">
     </div>
     <div style="color: #C0C0C0">不支持IE9以下版本</div>
     <div id="r_title"><b>定位结果:</b></div>

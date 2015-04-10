@@ -1,6 +1,6 @@
+var map, geolocation, cluster;
+var markers= [];
 Template.cluster.rendered = function() {
-  var map, geolocation, cluster;
-  var markers= [];
   //地图初始化&向地图随机加点
   map = new AMap.Map("mapContainer",{
     resizeEnable: true,
@@ -30,14 +30,6 @@ Template.cluster.rendered = function() {
     AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
     AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
   });
-  //获取当前位置信息
-  function getCurrentPosition () {
-    geolocation.getCurrentPosition();
-  };
-  //监控当前位置并获取当前位置信息
-  function watchPosition () {
-    geolocation.watchPosition();
-  };
   //解析定位结果
   function onComplete (data) {
     var str = '<div>定位成功</div>';
@@ -110,3 +102,16 @@ Template.cluster.rendered = function() {
     }
   }
 };
+
+Template.cluster.events({
+  //获取当前位置信息
+  'click #getCurrentPosition': function() {
+    console.log("getCurrentPosition");
+    geolocation.getCurrentPosition();
+  },
+  //监控当前位置并获取当前位置信息
+  'click #watchPosition': function() {
+    console.log("watchPosition");
+    geolocation.watchPosition();
+  }
+});
