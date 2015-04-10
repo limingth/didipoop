@@ -30,6 +30,16 @@ Template.cluster.rendered = function() {
     AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
     AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
   });
+
+  //add bounced marker
+  var marker = new AMap.Marker({
+    position:map.getCenter(),
+    draggable:true, //点标记可拖拽
+    cursor:'move'   //鼠标悬停点标记时的鼠标样式
+  });
+  marker.setMap(map);
+  marker.setAnimation('AMAP_ANIMATION_BOUNCE'); //设置点标记的动画效果，此处为弹跳效果
+
   //解析定位结果
   function onComplete (data) {
     var str = '<div>定位成功</div>';
