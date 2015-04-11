@@ -38,7 +38,7 @@ Template.cluster.rendered = function() {
     cursor:'move'   //鼠标悬停点标记时的鼠标样式
   });
   marker.setMap(map);
-  marker.setAnimation('AMAP_ANIMATION_BOUNCE'); //设置点标记的动画效果，此处为弹跳效果
+  // marker.setAnimation('AMAP_ANIMATION_BOUNCE'); //设置点标记的动画效果，此处为弹跳效果
 
   //解析定位结果
   function onComplete (data) {
