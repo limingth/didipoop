@@ -7,7 +7,7 @@ Template.cluster.rendered = function() {
     //二维地图显示视口
     view: new AMap.View2D({
       center:new AMap.LngLat(116.397428, 39.90923),
-      zoom:13
+      zoom:23
     })
 
   });
@@ -116,8 +116,18 @@ Template.cluster.rendered = function() {
 Template.cluster.events({
   //获取当前位置信息
   'click #getCurrentPosition': function() {
-    console.log("getCurrentPosition");
-    geolocation.getCurrentPosition();
+    if(!geolocation.isSupported()) {
+      alert("你的浏览器不支持定位功能");
+    }
+    console.log(geolocation.getCurrentPosition());
+    // map.setZoomAndCenter(24, geolocation.getCurrentPosition());
+    map.setZoomAndCenter(24, new AMap.LngLat(116.205467, 39.907761));
+    var marker = new AMap.Marker({
+      map: map,
+      // position: geolocation.getCurrentPosition()
+      position: new AMap.LngLat(116.205467, 39.907761)
+    });
+    // geolocation.getCurrentPosition();
   },
   //监控当前位置并获取当前位置信息
   'click #watchPosition': function() {
